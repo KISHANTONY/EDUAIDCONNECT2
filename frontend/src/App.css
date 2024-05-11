@@ -215,6 +215,11 @@ p {
   justify-content: space-between;
   padding: 25px 120px;
   align-items: center;
+  flex-shrink: 0;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
 }
 .footerShow div {
   display: flex;
@@ -251,21 +256,25 @@ p {
   display: none;
 }
 
-.about{
+.about {
   width: 100%;
   display: flex;
-  background-color:#F8F9FA;
+ 
+  background: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.6));
   padding-top: 80px;
+  position: relative;
+  top: -230px;
 }
+
 /* About image */
-.about .imgcontanner{
+.about .imgcontanner {
   width: 50%;
   position: relative;
-  
 }
+
 .about .imgcontanner .aboutimg {
   position: absolute;
-  background: url('/images/why.jpeg');
+  background: url('/why.jpeg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -282,22 +291,25 @@ p {
   color: white;
   background-color: rgb(1, 99, 1);
 }
+
 .aboutcontent h5 {
   letter-spacing: 2px;
   font-weight: 600;
   margin-bottom: 10px;
 }
+
 .aboutcontent h1 {
   font-weight: 600;
   font-size: 50px;
   padding-bottom: 20px;
 }
+
 .aboutcontent p {
   padding-bottom: 30px;
   line-height: 25px;
 }
 
-/* donate button  */
+/* donate button */
 .aboutcontent a {
   color: white;
   text-decoration: none;
@@ -311,29 +323,30 @@ p {
   letter-spacing: 2px;
   font-size: 14px;
 }
+
 .aboutcontent a:hover {
   background-position: right;
 }
-@media only screen and (max-width : 700px ) {
 
-  /* *******************************   About us  **************************************** */
-  .about{
+@media only screen and (max-width: 700px) {
+  /* About us */
+  .about {
       width: 100%;
       display: block;
-      background-color:#F8F9FA;
+      background-color: #F8F9FA;
       padding-top: 0px;
-
   }
+
   /* About image */
-  .about .imgcontanner{
+  .about .imgcontanner {
       width: 100%;
-      padding:3%;
+      padding: 3%;
       padding-bottom: 50px;
       box-sizing: border-box;
-
   }
+
   .about .imgcontanner .aboutimg {
-      position:relative;
+      position: relative;
       width: 100%;
       height: 450px;
       top: 0px;
@@ -347,19 +360,22 @@ p {
       padding: 65px 4%;
       box-sizing: border-box;
   }
+
   .aboutcontent h5 {
       margin-bottom: 10px;
   }
+
   .aboutcontent h1 {
       font-size: 30px;
   }
 }
 
-
 .heroSection {
   display: flex;
   flex-direction: column;
   padding: 75px 0 50px 0;
+  position: relative;
+  top: -80px;;
 }
 
 .heroSection  .cover {
@@ -488,6 +504,7 @@ p {
     max-width: 100%;
   }
 }
+
 .howitworks {
   background: #f1f3f6;
 }
@@ -547,6 +564,113 @@ p {
     height: 320px;
   }
 }
+.contact {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: transparent;
+    padding: 125px 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.6)) , url('/images/form.jpg');
+}
+.contact h1 {
+    color: white;
+    text-align: center;
+}
+.contact .contactcontanner {
+    width: 70%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.contact .contactcontanner .contanner {
+    width: 30%;
+}
+.contact .contactcontanner .contanner .heading {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border: 2px solid white;
+    margin-bottom: 8px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,.07);
+}
+.contact .contactcontanner .contanner .heading .icon {
+    padding: 0 0 0 20px;
+    font-size: 20px;
+    color: rgb(3, 180, 3);
+}
+.contact .contactcontanner .contanner .heading .info {
+    width: 70%;
+    margin: 25px auto;
+    color: white;
+}
+.contact .contactcontanner .contanner .heading .info #contactinfo {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+/* message form */
+.contact .contactcontanner .messageform {
+    width: 70%;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 8px rgba(0,0,0,.07);
+    margin-left: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.contact .contactcontanner .messageform .form {
+    width: 80%;
+    margin: 50px auto;
+}
+.contact .contactcontanner .messageform input , .messageform #inputbox {
+    width: 100%;
+    color: white;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid white;
+    outline: none;
+    background-color: transparent;
+}
+.contact .contactcontanner .messageform button {
+    padding: 10px 50px;
+    margin-top: 20px;
+    font-size: 14px;
+    color: white;
+    letter-spacing: 1px;
+    background: linear-gradient(to right , transparent 50% , rgb(3, 180, 3) 50%);
+    background-size: 200%;
+    background-position: left;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: .3s;
+}
+.contact .contactcontanner .messageform button:hover {
+    background-position: right;
+}
+
+/* contact mobile view */ 
+@media only screen and (max-width : 700px) {
+    .contact {
+        padding: 50px 0;
+    }
+    .contactcontanner {
+        width: 95%;
+        display: block;
+    }
+    .contactcontanner .container {
+        width: 100%;
+    }
+    /* message form */
+    .messageform {
+        width: 100%;
+        margin-left: 0px;
+        padding: 1px 0;
+    }
+    .messageform .form {
+        width: 93%;
+        margin: 50px auto;
+    }
+}
+
 @media (max-width: 480px) {
   .howitworks .container .banner .card {
     width: 100%;
@@ -1256,6 +1380,9 @@ p {
   background-color: #F8F9FA;
   text-align: center;
   box-sizing: border-box;
+  position: relative;
+  top: -160px;
+  background: linear-gradient(rgba(173, 173, 173, 0.8),rgba(179, 179, 179, 0.6));
 }
 .service h5{
   color: rgb(1, 99, 1);
@@ -1314,6 +1441,17 @@ p {
     gap: 8px;
   }
 }
+/* Scrolled navbar */
+.navbarScrolled {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0.6));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensure the navbar is on top of other content */
+}
+
 nav {
   background: #18191c;
   padding: 0 20px;

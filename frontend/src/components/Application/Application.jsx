@@ -21,7 +21,7 @@ const Application = () => {
     setResume(resume);
   };
 
-  const { id } = useParams();
+  const { id: requestId } = useParams();
   const handleApplication = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -31,7 +31,7 @@ const Application = () => {
     formData.append("address", address);
     formData.append("coverLetter", coverLetter);
     formData.append("resume", resume);
-    formData.append("requestId", id);
+    formData.append("requestId", requestId);
 
     try {
       const { data } = await axios.post(
@@ -51,9 +51,14 @@ const Application = () => {
       setAddress("");
       setResume("");
       toast.success(data.message);
+      await axios.put(`http://localhost:4000/api/v1/request/${irequestId}/expire`);
       navigateTo("/request/getall");
     } catch (error) {
-      toast.error(error.response.data.message);
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An error occurred. Please try again later.");
+      }
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../../main";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,8 +7,25 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
+  const [scrolled, setScrolled] = useState(false); // State to track scroll position
   const { isAuthorized, setIsAuthorized, user } = useContext(Context);
   const navigateTo = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -27,7 +44,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
+    <nav className={isAuthorized ? (scrolled ? "navbarScrolled" : "navbarShow") : "navbarHide"}>
       <div className="container">
         <h3><span>EduAid</span>Connect</h3>
         <ul className={!show ? "menu" : "show-menu menu"}>

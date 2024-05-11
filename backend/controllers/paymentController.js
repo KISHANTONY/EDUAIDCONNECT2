@@ -1,6 +1,6 @@
 import { catchAsyncErrors } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../middlewares/error.js";
-import { Application } from "../models/applicationSchema.js";
+import { Application } from "../models/paymentSchema.js";
 import { request } from "../models/Reqschema.js";
 import cloudinary from "cloudinary";
 

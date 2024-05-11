@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import validator from "validator";
 
-const applicationSchema = new mongoose.Schema({
+const paymentSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please enter your Name!"],
@@ -61,4 +61,4 @@ const applicationSchema = new mongoose.Schema({
   },
 });
 
-export const Application = mongoose.model("Payment", applicationSchema);
+export const Application = mongoose.model("Payment", paymentSchema);

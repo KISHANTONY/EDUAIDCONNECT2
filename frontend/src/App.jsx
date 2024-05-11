@@ -9,13 +9,13 @@ import axios from "axios";
 import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import Home from "./components/Home/Home";
-import Reqs from "./components/Job/Reqs";
-import JobDetails from "./components/Job/ReqDetails";
+import Reqs from "./components/Request/Reqs";
+import ReqDetails from "./components/Request/ReqDetails";
 import Application from "./components/Application/Application";
 import MyApplications from "./components/Application/MyApplications";
-import Postreq from "./components/Job/Postreq";
+import Postreq from "./components/Request/Postreq";
 import NotFound from "./components/NotFound/NotFound";
-import MyReqs from "./components/Job/MyReqs";
+import MyReqs from "./components/Request/MyReqs";
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -45,12 +45,12 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
-          <Route path="/job/getall" element={<Reqs />} />
-          <Route path="/job/:id" element={<JobDetails />} />
+          <Route path="/request/getall" element={<Reqs />} />
+          <Route path="/request/:id" element={<ReqDetails />} />
           <Route path="/application/:id" element={<Application />} />
           <Route path="/applications/me" element={<MyApplications />} />
-          <Route path="/job/post" element={<Postreq />} />
-          <Route path="/job/me" element={<MyReqs />} />
+          <Route path="/request/post" element={<Postreq />} />
+          <Route path="/request/me" element={<MyReqs />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

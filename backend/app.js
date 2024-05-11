@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { dbConnection } from "./database/dbConnection.js";
-import jobRouter from "./routes/jobRouter.js";
+import reqRouter from "./routes/reqRouter.js";
 import userRouter from "./routes/userRouter.js";
 import applicationRouter from "./routes/applicationRouter.js";
 import { config } from "dotenv";
@@ -32,8 +32,8 @@ app.use(
   })
 );
 app.use("/api/v1/user", userRouter);
-app.use("/api/v1/job", jobRouter);
-app.use("/api/v1/application", applicationRouter);
+app.use("/api/v1/request", reqRouter);
+app.use("/api/v1/payment", applicationRouter);
 dbConnection();
 
 app.use(errorMiddleware);

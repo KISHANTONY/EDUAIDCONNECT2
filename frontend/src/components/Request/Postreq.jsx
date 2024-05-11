@@ -23,7 +23,7 @@ const Postreq = () => {
     setMarklist(marklistFile);
   };
 
-  const handleJobPost = async (e) => {
+  const handlerequestPost = async (e) => {
     e.preventDefault();
     
     const formData = new FormData();
@@ -34,11 +34,12 @@ const Postreq = () => {
     formData.append("city", city);
     formData.append("location", location);
     formData.append("fixedAmount", fixedAmount); // Append fixedAmount to form data
-    formData.append("marklist", marklist); // Append marklist to form data
+    formData.append("marklist", marklist, marklist.name);
 
-    await axios
-      .post(
-        "http://localhost:4000/api/v1/job/post",
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/request/post",
         formData,
         {
           withCredentials: true,
@@ -46,13 +47,12 @@ const Postreq = () => {
             "Content-Type": "multipart/form-data",
           },
         }
-      )
-      .then((res) => {
-        toast.success(res.data.message);
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message);
-      });
+      );
+  
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   if (!isAuthorized || (user && user.role !== "Student")) {
@@ -61,10 +61,10 @@ const Postreq = () => {
 
   return (
     <>
-      <div className="job_post page">
+      <div className="request_post page">
         <div className="container">
           <h3>POST NEW REQUEST</h3>
-          <form onSubmit={handleJobPost}>
+          <form onSubmit={handlerequestPost}>
             <div className="wrapper">
               <input
                 type="text"

@@ -59,7 +59,7 @@ const reqschema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  jobPostedOn: {
+  PostedOn: {
     type: Date,
     default: Date.now,
   },
@@ -70,4 +70,4 @@ const reqschema = new mongoose.Schema({
   },
 });
 
-export const Job = mongoose.model("Job", reqschema);
+export const request = mongoose.model("Request", reqschema);

@@ -43,7 +43,7 @@ const applicationSchema = new mongoose.Schema({
     },
     role: {
       type: String,
-      enum: ["Job Seeker"],
+      enum: ["Sponsor"],
       required: true,
     },
   },
@@ -61,4 +61,4 @@ const applicationSchema = new mongoose.Schema({
   },
 });
 
-export const Application = mongoose.model("Application", applicationSchema);
+export const Application = mongoose.model("Payment", applicationSchema);

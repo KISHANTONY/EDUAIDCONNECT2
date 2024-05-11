@@ -1,7 +1,7 @@
 import { catchAsyncErrors } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../middlewares/error.js";
 import { Application } from "../models/applicationSchema.js";
-import { Job } from "../models/Reqschema.js";
+import { request } from "../models/Reqschema.js";
 import cloudinary from "cloudinary";
 
 export const postApplication = catchAsyncErrors(async (req, res, next) => {
@@ -33,21 +33,21 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
     );
     return next(new ErrorHandler("Failed to upload to Cloudinary", 500));
   }
-  const { name, email, coverLetter, phone, address, jobId } = req.body;
+  const { name, email, coverLetter, phone, address, requestId } = req.body;
   const applicantID = {
     user: req.user._id,
-    role: "Job Seeker",
+    role: "Sponsor",
   };
-  if (!jobId) {
-    return next(new ErrorHandler("Job not found!", 404));
+  if (!requestId) {
+    return next(new ErrorHandler("request not found!", 404));
   }
-  const jobDetails = await Job.findById(jobId);
-  if (!jobDetails) {
-    return next(new ErrorHandler("Job not found!", 404));
+  const ReqDetails = await request.findById(requestId);
+  if (!ReqDetails) {
+    return next(new ErrorHandler("request not found!", 404));
   }
 
   const StudentID = {
-    user: jobDetails.postedBy,
+    user: ReqDetails.postedBy,
     role: "Student",
   };
   if (
@@ -85,9 +85,9 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
 export const StudentGetAllApplications = catchAsyncErrors(
   async (req, res, next) => {
     const { role } = req.user;
-    if (role === "Job Seeker") {
+    if (role === "Sponsor") {
       return next(
-        new ErrorHandler("Job Seeker not allowed to access this resource.", 400)
+        new ErrorHandler("Sponsor not allowed to access this resource.", 400)
       );
     }
     const { _id } = req.user;

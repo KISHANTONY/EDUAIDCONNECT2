@@ -17,7 +17,7 @@ const Reqs = () => {
 
     try {
       axios
-        .get("http://localhost:4000/api/v1/job/getall", {
+        .get("http://localhost:4000/api/v1/request/getall", {
           withCredentials: true,
         })
         .then((res) => {
@@ -72,7 +72,7 @@ const Reqs = () => {
                 <p>{element.title}</p>
                 <p>{element.Gender}</p>
                 <p>Amount: {element.fixedAmount}</p>
-                <Link to={`/job/${element._id}`}>DONATE NOW</Link>
+                <Link to={`/request/${element._id}`}>DONATE NOW</Link>
               </div>
             );
           })}

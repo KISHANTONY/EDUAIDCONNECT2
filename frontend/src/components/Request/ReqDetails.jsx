@@ -4,11 +4,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
 import MarklistModal from "./MarklistModal";
-const JobDetails = () => {
+const ReqDetails = () => {
   const [modalOpen, setModalOpen] = useState(false); // State for controlling modal visibility
   const [marklistUrl, setMarklistUrl] = useState("");
   const { id } = useParams();
-  const [job, setJob] = useState({});
+  const [request, setrequest] = useState({});
   const navigateTo = useNavigate();
 
   const { isAuthorized, user } = useContext(Context);
@@ -21,11 +21,11 @@ const JobDetails = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/v1/job/${id}`, {
+      .get(`http://localhost:4000/api/v1/request/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
-        setJob(res.data.job);
+        setrequest(res.data.request);
       })
       .catch((error) => {
         navigateTo("/notfound");
@@ -37,55 +37,55 @@ const JobDetails = () => {
   }
 
   return (
-    <section className="jobDetail page">
+    <section className="requestDetail page">
       <div className="container">
         <h3>Student Details</h3>
         <div className="banner">
           <p>
-            Name: <span> {job.title}</span>
+            Name: <span> {request.title}</span>
           </p>
           <p>
-            Gender: <span>{job.Gender}</span>
+            Gender: <span>{request.Gender}</span>
           </p>
           <p>
-            UPI: <span>{job.UPI}</span>
+            UPI: <span>{request.UPI}</span>
           </p>
           <p>
-            College: <span>{job.city}</span>
+            College: <span>{request.city}</span>
           </p>
           <p>
-            Location: <span>{job.location}</span>
+            Location: <span>{request.location}</span>
           </p>
           <p>
-            Description: <span>{job.description}</span>
+            Description: <span>{request.description}</span>
           </p>
           <p>
-            Posted On: <span>{job.jobPostedOn}</span>
+            Posted On: <span>{request.requestPostedOn}</span>
           </p>
           <p>
             Amount:{" "}
-            {job.fixedAmount ? (
-              <span>{job.fixedAmount}</span>
+            {request.fixedAmount ? (
+              <span>{request.fixedAmount}</span>
             ) : (
               <span>
-                {job.AmountFrom} - {job.AmountTo}
+                {request.AmountFrom} - {request.AmountTo}
               </span>
             )}
           </p>
-          {job.marklist && job.marklist.url && (
+          {request.marklist && request.marklist.url && (
             <div>
               <p>Marklist:</p>
               <img
-                src={job.marklist.url}
+                src={request.marklist.url}
                 alt="Marklist"
-                onClick={() => openModal(job.marklist.url)}
+                onClick={() => openModal(request.marklist.url)}
               />
             </div>
           )}
           {user && user.role === "Student" ? (
             <></>
           ) : (
-            <Link to={`/application/${job._id}`}>Pay Now</Link>
+            <Link to={`/application/${request._id}`}>Pay Now</Link>
           )}
         </div>
       </div>
@@ -96,4 +96,4 @@ const JobDetails = () => {
   );
 };
 
-export default JobDetails;
+export default ReqDetails;

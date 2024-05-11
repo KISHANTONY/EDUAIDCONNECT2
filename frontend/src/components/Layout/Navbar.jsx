@@ -36,9 +36,9 @@ const Navbar = () => {
               HOME
             </Link>
           </li>
-          {user && user.role === "Job Seeker" && (
+          {user && user.role === "Sponsor" && (
             <li>
-              <Link to={"/job/getall"} onClick={() => setShow(false)}>
+              <Link to={"/request/getall"} onClick={() => setShow(false)}>
                 REQUESTS
               </Link>
             </li>
@@ -53,12 +53,12 @@ const Navbar = () => {
           {user && user.role === "Student" && (
             <>
               <li>
-                <Link to={"/job/post"} onClick={() => setShow(false)}>
+                <Link to={"/request/post"} onClick={() => setShow(false)}>
                   POST NEW REQUEST
                 </Link>
               </li>
               <li>
-                <Link to={"/job/me"} onClick={() => setShow(false)}>
+                <Link to={"/request/me"} onClick={() => setShow(false)}>
                   VIEW YOUR REQUESTS
                 </Link>
               </li>

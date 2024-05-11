@@ -1,5 +1,5 @@
 import { catchAsyncErrors } from "../middlewares/catchAsyncError.js";
-import { Job } from "../models/Reqschema.js";
+import { request as Request } from "../models/Reqschema.js";
 import ErrorHandler from "../middlewares/error.js";
 import cloudinary from "cloudinary";
 import fs from "fs";
@@ -23,16 +23,17 @@ const uploadToCloudinary = async (file) => {
   }
 };
 export const getAllReqs = catchAsyncErrors(async (req, res, next) => {
-  const Reqs = await Job.find({ expired: false });
+  const Reqs = await Request.find({ expired: false });
   res.status(200).json({
     success: true,
     Reqs,
   });
 });
 
+
 export const Postreq = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
-  if (role === "Job Seeker") {
+  if (role === "Sponsor") {
     return next(
       new ErrorHandler("not allowed to access this resource.", 400)
     );
@@ -64,7 +65,7 @@ export const Postreq = catchAsyncErrors(async (req, res, next) => {
     marklistPublicId = marklistUpload.public_id;
   }
 
-  const job = await Job.create({
+  const request = await Request.create({
     title,
     description,
     Gender,
@@ -76,45 +77,45 @@ export const Postreq = catchAsyncErrors(async (req, res, next) => {
     AmountTo,
     postedBy,
     marklist: {
-      url: marklistUrl || "", // Use an empty string if no marklist file is provided
-      public_id: marklistPublicId || "", // Use an empty string if no marklist file is provided
+      url: marklistUrl || "",
+      public_id: marklistPublicId || "",
     },
   });
 
   res.status(200).json({
     success: true,
     message: " Request Posted Successfully!",
-    job,
+    request,
   });
 });
 
 export const getMyReqs = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
-  if (role === "Job Seeker") {
+  if (role === "Sponsor") {
     return next(
       new ErrorHandler("not allowed to access this resource.", 400)
     );
   }
-  const myReqs = await Job.find({ postedBy: req.user._id });
+  const myReqs = await Request.find({ postedBy: req.user._id });
   res.status(200).json({
     success: true,
     myReqs,
   });
 });
 
-export const updateJob = catchAsyncErrors(async (req, res, next) => {
+export const updaterequest = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
-  if (role === "Job Seeker") {
+  if (role === "Sponsor") {
     return next(
-      new ErrorHandler("Job Seeker not allowed to access this resource.", 400)
+      new ErrorHandler("Sponsor not allowed to access this resource.", 400)
     );
   }
   const { id } = req.params;
-  let job = await Job.findById(id);
-  if (!job) {
+  let requestData = await Request.findById(id);
+  if (!requestData) {
     return next(new ErrorHandler("OOPS! not found.", 404));
   }
-  job = await Job.findByIdAndUpdate(id, req.body, {
+  requestData = await Request.findByIdAndUpdate(id, req.body, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
@@ -125,35 +126,35 @@ export const updateJob = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-export const deleteJob = catchAsyncErrors(async (req, res, next) => {
+export const deleterequest = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
-  if (role === "Job Seeker") {
+  if (role === "Sponsor") {
     return next(
       new ErrorHandler("not allowed to access this resource.", 400)
     );
   }
   const { id } = req.params;
-  const job = await Job.findById(id);
-  if (!job) {
+  const request = await Request.findById(id);
+  if (!request) {
     return next(new ErrorHandler("OOPS!not found.", 404));
   }
-  await job.deleteOne();
+  await request.deleteOne();
   res.status(200).json({
     success: true,
     message: " Deleted!",
   });
 });
 
-export const getSingleJob = catchAsyncErrors(async (req, res, next) => {
+export const getSinglerequest = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
   try {
-    const job = await Job.findById(id);
-    if (!job) {
+    const request = await Request.findById(id);
+    if (!request) {
       return next(new ErrorHandler("not found.", 404));
     }
     res.status(200).json({
       success: true,
-      job,
+      request,
     });
   } catch (error) {
     return next(new ErrorHandler(`Invalid ID / CastError`, 404));

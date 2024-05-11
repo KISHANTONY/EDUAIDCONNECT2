@@ -31,11 +31,11 @@ const Application = () => {
     formData.append("address", address);
     formData.append("coverLetter", coverLetter);
     formData.append("resume", resume);
-    formData.append("jobId", id);
+    formData.append("requestId", id);
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/application/post",
+        "http://localhost:4000/api/v1/payment/post",
         formData,
         {
           withCredentials: true,
@@ -51,7 +51,7 @@ const Application = () => {
       setAddress("");
       setResume("");
       toast.success(data.message);
-      navigateTo("/job/getall");
+      navigateTo("/request/getall");
     } catch (error) {
       toast.error(error.response.data.message);
     }

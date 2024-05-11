@@ -18,7 +18,7 @@ const MyApplications = () => {
     try {
       if (user && user.role === "Student") {
         axios
-          .get("http://localhost:4000/api/v1/application/Student/getall", {
+          .get("http://localhost:4000/api/v1/payment/Student/getall", {
             withCredentials: true,
           })
           .then((res) => {
@@ -26,7 +26,7 @@ const MyApplications = () => {
           });
       } else {
         axios
-          .get("http://localhost:4000/api/v1/application/Reqseeker/getall", {
+          .get("http://localhost:4000/api/v1/payment/Reqseeker/getall", {
             withCredentials: true,
           })
           .then((res) => {
@@ -45,7 +45,7 @@ const MyApplications = () => {
   const deleteApplication = (id) => {
     try {
       axios
-        .delete(`http://localhost:4000/api/v1/application/delete/${id}`, {
+        .delete(`http://localhost:4000/api/v1/payment/delete/${id}`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -70,7 +70,7 @@ const MyApplications = () => {
 
   return (
     <section className="my_applications page">
-      {user && user.role === "Job Seeker" ? (
+      {user && user.role === "Sponsor" ? (
         <div className="container">
           <h1>YOUR PAYMENTS</h1>
           {applications.length <= 0 ? (
@@ -123,7 +123,7 @@ export default MyApplications;
 const ReqseekerCard = ({ element, deleteApplication, openModal }) => {
   return (
     <>
-      <div className="job_seeker_card">
+      <div className="request_seeker_card">
         <div className="detail">
           <p>
             <span>Name:</span> {element.name}
@@ -161,7 +161,7 @@ const ReqseekerCard = ({ element, deleteApplication, openModal }) => {
 const StudentCard = ({ element, openModal }) => {
   return (
     <>
-      <div className="job_seeker_card">
+      <div className="request_seeker_card">
         <div className="detail">
           <p>
             <span>Name:</span> {element.name}

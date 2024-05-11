@@ -57,7 +57,7 @@ const Login = () => {
                 <select value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">Select Role</option>
                   <option value="Student">Student</option>
-                  <option value="Job Seeker">Sponsor</option>
+                  <option value="Sponsor">Sponsor</option>
                 </select>
                 <FaRegUser />
               </div>

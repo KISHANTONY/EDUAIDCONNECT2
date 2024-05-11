@@ -17,7 +17,7 @@ const MyReqs = () => {
     const fetchReqs = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/api/v1/job/getmyReqs",
+          "http://localhost:4000/api/v1/request/getmyReqs",
           { withCredentials: true }
         );
         setMyReqs(data.myReqs);
@@ -33,9 +33,9 @@ const MyReqs = () => {
   }
 
   //Function For Enabling Editing Mode
-  const handleEnableEdit = (jobId) => {
-    //Here We Are Giving Id in setEditingMode because We want to enable only that job whose ID has been send.
-    setEditingMode(jobId);
+  const handleEnableEdit = (requestId) => {
+    //Here We Are Giving Id in setEditingMode because We want to enable only that request whose ID has been send.
+    setEditingMode(requestId);
   };
 
   //Function For Disabling Editing Mode
@@ -43,11 +43,11 @@ const MyReqs = () => {
     setEditingMode(null);
   };
 
-  //Function For Updating The Job
-  const handleUpdateJob = async (jobId) => {
-    const updatedJob = myReqs.find((job) => job._id === jobId);
+  //Function For Updating The request
+  const handleUpdaterequest = async (requestId) => {
+    const updatedrequest = myReqs.find((request) => request._id === requestId);
     await axios
-      .put(`http://localhost:4000/api/v1/job/update/${jobId}`, updatedJob, {
+      .put(`http://localhost:4000/api/v1/request/update/${requestId}`, updatedrequest, {
         withCredentials: true,
       })
       .then((res) => {
@@ -59,26 +59,26 @@ const MyReqs = () => {
       });
   };
 
-  //Function For Deleting Job
-  const handleDeleteJob = async (jobId) => {
+  //Function For Deleting request
+  const handleDeleterequest = async (requestId) => {
     await axios
-      .delete(`http://localhost:4000/api/v1/job/delete/${jobId}`, {
+      .delete(`http://localhost:4000/api/v1/request/delete/${requestId}`, {
         withCredentials: true,
       })
       .then((res) => {
         toast.success(res.data.message);
-        setMyReqs((prevReqs) => prevReqs.filter((job) => job._id !== jobId));
+        setMyReqs((prevReqs) => prevReqs.filter((request) => request._id !== requestId));
       })
       .catch((error) => {
         toast.error(error.response.data.message);
       });
   };
 
-  const handleInputChange = (jobId, field, value) => {
-    // Update the job object in the Reqs state with the new value
+  const handleInputChange = (requestId, field, value) => {
+    // Update the request object in the Reqs state with the new value
     setMyReqs((prevReqs) =>
-      prevReqs.map((job) =>
-        job._id === jobId ? { ...job, [field]: value } : job
+      prevReqs.map((request) =>
+        request._id === requestId ? { ...request, [field]: value } : request
       )
     );
   };
@@ -287,7 +287,7 @@ const MyReqs = () => {
                         {editingMode === element._id ? (
                           <>
                             <button
-                              onClick={() => handleUpdateJob(element._id)}
+                              onClick={() => handleUpdaterequest(element._id)}
                               className="check_btn"
                             >
                               <FaCheck />
@@ -309,7 +309,7 @@ const MyReqs = () => {
                         )}
                       </div>
                       <button
-                        onClick={() => handleDeleteJob(element._id)}
+                        onClick={() => handleDeleterequest(element._id)}
                         className="delete_btn"
                       >
                         Delete

@@ -25,7 +25,7 @@ const paymentSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter your Address!"],
   },
-  resume: {
+  proof: {
     public_id: {
       type: String, 
       required: true,

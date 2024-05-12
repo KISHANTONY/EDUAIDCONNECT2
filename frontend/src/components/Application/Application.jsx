@@ -9,7 +9,7 @@ const Application = () => {
   const [coverLetter, setCoverLetter] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const [resume, setResume] = useState(null);
+  const [proof, setProof] = useState(null);
 
   const { isAuthorized, user } = useContext(Context);
 
@@ -17,8 +17,8 @@ const Application = () => {
 
   // Function to handle file input changes
   const handleFileChange = (event) => {
-    const resume = event.target.files[0];
-    setResume(resume);
+    const proof = event.target.files[0];
+    setProof(proof);
   };
 
   const { id } = useParams();
@@ -30,7 +30,7 @@ const Application = () => {
     formData.append("phone", phone);
     formData.append("address", address);
     formData.append("coverLetter", coverLetter);
-    formData.append("resume", resume);
+    formData.append("proof", proof);
     formData.append("requestId", id);
 
     try {
@@ -49,7 +49,7 @@ const Application = () => {
       setCoverLetter("");
       setPhone("");
       setAddress("");
-      setResume("");
+      setProof("");
       toast.success(data.message);
       navigateTo("/request/getall");
     } catch (error) {

@@ -3,13 +3,13 @@ import { Context } from "../../main";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import ResumeModal from "./ResumeModal";
+import ProofModal from "./ProofModal";
 
 const MyApplications = () => {
   const { user } = useContext(Context);
   const [applications, setApplications] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [resumeImageUrl, setResumeImageUrl] = useState("");
+  const [proofImageUrl, setProofImageUrl] = useState("");
 
   const { isAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
@@ -60,7 +60,7 @@ const MyApplications = () => {
   };
 
   const openModal = (imageUrl) => {
-    setResumeImageUrl(imageUrl);
+    setProofImageUrl(imageUrl);
     setModalOpen(true);
   };
 
@@ -112,7 +112,7 @@ const MyApplications = () => {
         </div>
       )}
       {modalOpen && (
-        <ResumeModal imageUrl={resumeImageUrl} onClose={closeModal} />
+        <ProofModal imageUrl={proofImageUrl} onClose={closeModal} />
       )}
     </section>
   );
@@ -141,11 +141,11 @@ const ReqseekerCard = ({ element, deleteApplication, openModal }) => {
             <span>CoverLetter:</span> {element.coverLetter}
           </p>
         </div>
-        <div className="resume">
+        <div className="proof">
           <img
-            src={element.resume.url}
-            alt="resume"
-            onClick={() => openModal(element.resume.url)}
+            src={element.proof.url}
+            alt="proof"
+            onClick={() => openModal(element.proof.url)}
           />
         </div>
         <div className="btn_area">
@@ -179,11 +179,11 @@ const StudentCard = ({ element, openModal }) => {
             <span>CoverLetter:</span> {element.coverLetter}
           </p>
         </div>
-        <div className="resume">
+        <div className="proof">
           <img
-            src={element.resume.url}
-            alt="resume"
-            onClick={() => openModal(element.resume.url)}
+            src={element.proof.url}
+            alt="proof"
+            onClick={() => openModal(element.proof.url)}
           />
         </div>
       </div>

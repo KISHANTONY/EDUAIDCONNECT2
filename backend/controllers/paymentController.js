@@ -15,15 +15,15 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("File Required!", 400));
   }
 
-  const { resume } = req.files;
+  const { proof } = req.files;
   const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
-  if (!allowedFormats.includes(resume.mimetype)) {
+  if (!allowedFormats.includes(proof.mimetype)) {
     return next(
       new ErrorHandler("Invalid file type. Please upload a PNG file.", 400)
     );
   }
   const cloudinaryResponse = await cloudinary.uploader.upload(
-    resume.tempFilePath
+    proof.tempFilePath
   );
 
   if (!cloudinaryResponse || cloudinaryResponse.error) {
@@ -58,7 +58,7 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
     !address ||
     !applicantID ||
     !StudentID ||
-    !resume
+    !proof
   ) {
     return next(new ErrorHandler("Please fill all fields.", 400));
   }
@@ -70,7 +70,7 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
     address,
     applicantID,
     StudentID,
-    resume: {
+    proof: {
       public_id: cloudinaryResponse.public_id,
       url: cloudinaryResponse.secure_url,
     },

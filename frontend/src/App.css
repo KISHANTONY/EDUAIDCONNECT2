@@ -1045,16 +1045,16 @@ p {
 .request_seeker_card .detail span {
   font-weight: bold;
 }
-.request_seeker_card .resume {
+.request_seeker_card .proof {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-.request_seeker_card .resume {
+.request_seeker_card .proof {
   position: relative;
   height: 250px;
 }
-.request_seeker_card .resume img {
+.request_seeker_card .proof img {
   width: auto;
   height: 100%;
   position: absolute;
@@ -1084,7 +1084,7 @@ p {
   .request_seeker_card .detail {
     flex: 1;
   }
-  .request_seeker_card .resume {
+  .request_seeker_card .proof {
     flex: 1;
   }
   .request_seeker_card .btn_area {
@@ -1099,7 +1099,7 @@ p {
   .request_seeker_card .detail {
     flex: none;
   }
-  .request_seeker_card .resume {
+  .request_seeker_card .proof {
     flex: none;
     width: 320px;
     margin: 30px 0;
@@ -1110,7 +1110,7 @@ p {
 }
 @media (max-width: 360px) {
   .request_seeker_card,
-  .request_seeker_card .resume {
+  .request_seeker_card .proof {
     width: 100%;
   }
 }
@@ -1626,7 +1626,7 @@ nav .hamburger {
   transition: all 0.3s;
   color: #f1f3f6;
 }
-.resume-modal {
+.proof-modal {
   width: 100%;
   display: flex;
   background: #00000085;
@@ -1635,7 +1635,7 @@ nav .hamburger {
   top: 0;
   left: 0;
 }
-.resume-modal .modal-content {
+.proof-modal .modal-content {
   width: 100%;
   height: 100%;
   display: flex;
@@ -1643,22 +1643,22 @@ nav .hamburger {
   justify-content: center;
   position: relative;
 }
-.resume-modal .modal-content .close {
+.proof-modal .modal-content .close {
   position: absolute;
   right: 36px;
   top: 35px;
   font-size: 50px;
   color: #d9534f;
 }
-.resume-modal .modal-content .close:hover {
+.proof-modal .modal-content .close:hover {
   cursor: pointer;
 }
-.resume-modal .modal-content img {
+.proof-modal .modal-content img {
   max-width: 550px;
   height: auto;
 }
 @media (max-width: 1130px) {
-  .resume-modal {
+  .proof-modal {
     z-index: 11;
   }
 }

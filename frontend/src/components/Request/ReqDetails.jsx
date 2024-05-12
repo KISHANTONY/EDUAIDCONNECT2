@@ -85,7 +85,7 @@ const ReqDetails = () => {
           {user && user.role === "Student" ? (
             <></>
           ) : (
-            <Link to={`/application/${request._id}`}>Pay Now</Link>
+            <Link to={`/payment/${request._id}`}>Pay Now</Link>
           )}
         </div>
       </div>

@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../../main";
-const Application = () => {
+const Payment = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [coverLetter, setCoverLetter] = useState("");
@@ -22,7 +22,7 @@ const Application = () => {
   };
 
   const { id } = useParams();
-  const handleApplication = async (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
@@ -62,10 +62,10 @@ const Application = () => {
   }
 
   return (
-    <section className="application">
+    <section className="payment">
       <div className="container">
         <h3>PAYMENT</h3>
-        <form onSubmit={handleApplication}>
+        <form onSubmit={handlePayment}>
           <input
             type="text"
             placeholder="Your Name"
@@ -115,4 +115,4 @@ const Application = () => {
   );
 };
 
-export default Application;
+export default Payment;

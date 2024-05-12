@@ -1,10 +1,10 @@
 import { catchAsyncErrors } from "../middlewares/catchAsyncError.js";
 import ErrorHandler from "../middlewares/error.js";
-import { Application } from "../models/paymentSchema.js";
+import { Payment } from "../models/paymentSchema.js";
 import { request } from "../models/Reqschema.js";
 import cloudinary from "cloudinary";
 
-export const postApplication = catchAsyncErrors(async (req, res, next) => {
+export const postPayment = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;
   if (role === "Student") {
     return next(
@@ -62,7 +62,7 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
   ) {
     return next(new ErrorHandler("Please fill all fields.", 400));
   }
-  const application = await Application.create({
+  const payment = await Payment.create({
     name,
     email,
     coverLetter,
@@ -78,11 +78,11 @@ export const postApplication = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "Submitted!",
-    application,
+    payment,
   });
 });
 
-export const StudentGetAllApplications = catchAsyncErrors(
+export const StudentGetAllPayments = catchAsyncErrors(
   async (req, res, next) => {
     const { role } = req.user;
     if (role === "Sponsor") {
@@ -91,15 +91,15 @@ export const StudentGetAllApplications = catchAsyncErrors(
       );
     }
     const { _id } = req.user;
-    const applications = await Application.find({ "StudentID.user": _id });
+    const payments = await Payment.find({ "StudentID.user": _id });
     res.status(200).json({
       success: true,
-      applications,
+      payments,
     });
   }
 );
 
-export const ReqseekerGetAllApplications = catchAsyncErrors(
+export const ReqseekerGetAllPayments = catchAsyncErrors(
   async (req, res, next) => {
     const { role } = req.user;
     if (role === "Student") {
@@ -108,15 +108,15 @@ export const ReqseekerGetAllApplications = catchAsyncErrors(
       );
     }
     const { _id } = req.user;
-    const applications = await Application.find({ "applicantID.user": _id });
+    const payments = await Payment.find({ "applicantID.user": _id });
     res.status(200).json({
       success: true,
-      applications,
+      payments,
     });
   }
 );
 
-export const ReqseekerDeleteApplication = catchAsyncErrors(
+export const ReqseekerDeletePayment = catchAsyncErrors(
   async (req, res, next) => {
     const { role } = req.user;
     if (role === "Student") {
@@ -125,11 +125,11 @@ export const ReqseekerDeleteApplication = catchAsyncErrors(
       );
     }
     const { id } = req.params;
-    const application = await Application.findById(id);
-    if (!application) {
+    const payment = await Payment.findById(id);
+    if (!payment) {
       return next(new ErrorHandler(" not found!", 404));
     }
-    await application.deleteOne();
+    await payment.deleteOne();
     res.status(200).json({
       success: true,
       message: "Deleted!",

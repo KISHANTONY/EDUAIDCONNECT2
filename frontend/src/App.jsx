@@ -11,8 +11,8 @@ import Footer from "./components/Layout/Footer";
 import Home from "./components/Home/Home";
 import Reqs from "./components/Request/Reqs";
 import ReqDetails from "./components/Request/ReqDetails";
-import Application from "./components/Application/Application";
-import MyApplications from "./components/Application/MyApplications";
+import Payment from "./components/Payment/Payment";
+import MyPayments from "./components/Payment/MyPayments";
 import Postreq from "./components/Request/Postreq";
 import NotFound from "./components/NotFound/NotFound";
 import MyReqs from "./components/Request/MyReqs";
@@ -47,8 +47,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/request/getall" element={<Reqs />} />
           <Route path="/request/:id" element={<ReqDetails />} />
-          <Route path="/application/:id" element={<Application />} />
-          <Route path="/applications/me" element={<MyApplications />} />
+          <Route path="/payment/:id" element={<Payment />} />
+          <Route path="/payments/me" element={<MyPayments />} />
           <Route path="/request/post" element={<Postreq />} />
           <Route path="/request/me" element={<MyReqs />} />
           <Route path="*" element={<NotFound />} />

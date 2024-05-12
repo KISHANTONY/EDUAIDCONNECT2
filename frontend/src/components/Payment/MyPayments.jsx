@@ -5,9 +5,9 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import ProofModal from "./ProofModal";
 
-const MyApplications = () => {
+const MyPayments = () => {
   const { user } = useContext(Context);
-  const [applications, setApplications] = useState([]);
+  const [payments, setPayments] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [proofImageUrl, setProofImageUrl] = useState("");
 
@@ -22,7 +22,7 @@ const MyApplications = () => {
             withCredentials: true,
           })
           .then((res) => {
-            setApplications(res.data.applications);
+            setPayments(res.data.payments);
           });
       } else {
         axios
@@ -30,7 +30,7 @@ const MyApplications = () => {
             withCredentials: true,
           })
           .then((res) => {
-            setApplications(res.data.applications);
+            setPayments(res.data.payments);
           });
       }
     } catch (error) {
@@ -42,7 +42,7 @@ const MyApplications = () => {
     navigateTo("/");
   }
 
-  const deleteApplication = (id) => {
+  const deletePayment = (id) => {
     try {
       axios
         .delete(`http://localhost:4000/api/v1/payment/delete/${id}`, {
@@ -50,8 +50,8 @@ const MyApplications = () => {
         })
         .then((res) => {
           toast.success(res.data.message);
-          setApplications((prevApplication) =>
-            prevApplication.filter((application) => application._id !== id)
+          setPayments((prevPayment) =>
+            prevPayment.filter((payment) => payment._id !== id)
           );
         });
     } catch (error) {
@@ -69,22 +69,22 @@ const MyApplications = () => {
   };
 
   return (
-    <section className="my_applications page">
+    <section className="my_payments page">
       {user && user.role === "Sponsor" ? (
         <div className="container">
           <h1>YOUR PAYMENTS</h1>
-          {applications.length <= 0 ? (
+          {payments.length <= 0 ? (
             <>
               {" "}
               <h4>No Payments Found</h4>{" "}
             </>
           ) : (
-            applications.map((element) => {
+            payments.map((element) => {
               return (
                 <ReqseekerCard
                   element={element}
                   key={element._id}
-                  deleteApplication={deleteApplication}
+                  deletePayment={deletePayment}
                   openModal={openModal}
                 />
               );
@@ -94,12 +94,12 @@ const MyApplications = () => {
       ) : (
         <div className="container">
           <h1>Payments</h1>
-          {applications.length <= 0 ? (
+          {payments.length <= 0 ? (
             <>
               <h4>No Payments Found</h4>
             </>
           ) : (
-            applications.map((element) => {
+            payments.map((element) => {
               return (
                 <StudentCard
                   element={element}
@@ -118,9 +118,9 @@ const MyApplications = () => {
   );
 };
 
-export default MyApplications;
+export default MyPayments;
 
-const ReqseekerCard = ({ element, deleteApplication, openModal }) => {
+const ReqseekerCard = ({ element, deletePayment, openModal }) => {
   return (
     <>
       <div className="request_seeker_card">
@@ -149,7 +149,7 @@ const ReqseekerCard = ({ element, deleteApplication, openModal }) => {
           />
         </div>
         <div className="btn_area">
-          <button onClick={() => deleteApplication(element._id)}>
+          <button onClick={() => deletePayment(element._id)}>
             Delete 
           </button>
         </div>

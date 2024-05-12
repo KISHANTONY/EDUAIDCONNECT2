@@ -61,7 +61,7 @@ const Navbar = () => {
             </li>
           )}
           <li>
-            <Link to={"/applications/me"} onClick={() => setShow(false)}>
+            <Link to={"/payments/me"} onClick={() => setShow(false)}>
               {user && user.role === "Student"
                 ? "PAYMENT NOTIFICATIONS"
                 : "YOUR PAYMENTS"}

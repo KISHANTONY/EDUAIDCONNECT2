@@ -7,6 +7,7 @@ import MarklistModal from "./MarklistModal";
 const ReqDetails = () => {
   const [modalOpen, setModalOpen] = useState(false); // State for controlling modal visibility
   const [marklistUrl, setMarklistUrl] = useState("");
+  const [certificateUrl, setCertificateUrl] = useState("");
   const { id } = useParams();
   const [request, setrequest] = useState({});
   const navigateTo = useNavigate();
@@ -82,6 +83,16 @@ const ReqDetails = () => {
               />
             </div>
           )}
+           {request.certificate && request.certificate.url && (
+            <div>
+              <p>Certificate:</p>
+              <img
+                src={request.certificate.url}
+                alt="Certificate"
+                onClick={() => openModal(request.certificate.url)}
+              />
+            </div>
+          )}
           {user && user.role === "Student" ? (
             <></>
           ) : (
@@ -90,7 +101,11 @@ const ReqDetails = () => {
         </div>
       </div>
       {modalOpen && (
-        <MarklistModal marklistUrl={marklistUrl} onClose={closeModal} />
+        <MarklistModal
+          marklistUrl={marklistUrl}
+          certificateUrl={certificateUrl}
+          onClose={closeModal}
+        />
       )}
     </section>
   );

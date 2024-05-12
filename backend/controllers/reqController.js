@@ -57,14 +57,19 @@ export const Postreq = catchAsyncErrors(async (req, res, next) => {
 
   const postedBy = req.user._id;
 
-  let marklistUrl, marklistPublicId;
+  let marklistUrl, marklistPublicId, certificateUrl, certificatePublicId;
   if (req.files && req.files.marklist) {
     const { marklist } = req.files;
     const marklistUpload = await uploadToCloudinary(marklist);
     marklistUrl = marklistUpload.url;
     marklistPublicId = marklistUpload.public_id;
   }
-
+  if (req.files && req.files.certificate) {
+    const { certificate } = req.files;
+    const certificateUpload = await uploadToCloudinary(certificate);
+    certificateUrl = certificateUpload.url;
+    certificatePublicId = certificateUpload.public_id;
+  }
   const request = await Request.create({
     title,
     description,
@@ -79,6 +84,10 @@ export const Postreq = catchAsyncErrors(async (req, res, next) => {
     marklist: {
       url: marklistUrl || "",
       public_id: marklistPublicId || "",
+    },
+    certificate: {
+      url: certificateUrl || "",
+      public_id: certificatePublicId || "",
     },
   });
 

@@ -13,7 +13,7 @@ const Postreq = () => {
   const [location, setLocation] = useState("");
   const [fixedAmount, setFixedAmount] = useState("");
   const [marklist, setMarklist] = useState(null); // New state for marklist
-
+  const [certificate, setCertificate] = useState(null);
   const { isAuthorized, user } = useContext(Context);
   const navigateTo = useNavigate();
 
@@ -22,7 +22,10 @@ const Postreq = () => {
     const marklistFile = event.target.files[0];
     setMarklist(marklistFile);
   };
-
+  const handleCertificateChange = (event) => {
+    const certificateFile = event.target.files[0];
+    setCertificate(certificateFile);
+  };
   const handlerequestPost = async (e) => {
     e.preventDefault();
     
@@ -35,6 +38,7 @@ const Postreq = () => {
     formData.append("location", location);
     formData.append("fixedAmount", fixedAmount); // Append fixedAmount to form data
     formData.append("marklist", marklist, marklist.name);
+    formData.append("certificate", certificate, certificate.name);
 
 
     try {
@@ -117,6 +121,15 @@ const Postreq = () => {
                 type="file"
                 accept=".pdf, .jpg, .png"
                 onChange={handleFileChange}
+                style={{ width: "100%" }}
+              />
+            </div>
+            <div>
+              <label>Certificate</label>
+              <input
+                type="file"
+                accept=".pdf, .jpg, .png"
+                onChange={handleCertificateChange}
                 style={{ width: "100%" }}
               />
             </div>

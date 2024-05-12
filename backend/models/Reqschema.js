@@ -17,6 +17,16 @@ const reqschema = new mongoose.Schema({
       required: true,
     },
   },
+  certificate: {
+    public_id: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
+  },
   description: {
     type: String,
     required: [true, "Please provide decription."],

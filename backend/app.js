@@ -9,7 +9,6 @@ import cors from "cors";
 import { errorMiddleware } from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
-import { Server } from 'socket.io';
 
 const app = express();
 dotenv.config({ path: "./config/config.env" });

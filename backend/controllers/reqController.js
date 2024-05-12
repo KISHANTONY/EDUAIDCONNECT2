@@ -22,29 +22,6 @@ const uploadToCloudinary = async (file) => {
     fs.unlinkSync(file.tempFilePath);
   }
 };
-
-export const markRequestAsExpired = catchAsyncErrors(async (req, res, next) => {
-  const { id } = req.params;
-  const request = await Request.findById(id);
-
-  if (!request) {
-    return next(new ErrorHandler("Request not found.", 404));
-  }
-
-  // Check if the request was posted by the current user (Student)
-  if (request.postedBy.toString() !== req.user._id.toString()) {
-    return next(new ErrorHandler("Not authorized to update this request.", 403));
-  }
-
-  request.expired = true;
-  await request.save();
-  io.emit("requestExpired", id);
-  res.status(200).json({
-    success: true,
-    message: "Request marked as expired/completed.",
-  });
-});
-
 export const getAllReqs = catchAsyncErrors(async (req, res, next) => {
   const Reqs = await Request.find({ expired: false });
   res.status(200).json({
@@ -52,6 +29,7 @@ export const getAllReqs = catchAsyncErrors(async (req, res, next) => {
     Reqs,
   });
 });
+
 
 export const Postreq = catchAsyncErrors(async (req, res, next) => {
   const { role } = req.user;

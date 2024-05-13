@@ -68,19 +68,19 @@ const Payment = () => {
         <form onSubmit={handlePayment}>
           <input
             type="text"
-            placeholder="Your Name"
+            placeholder="Your Name(optional)"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <input
             type="email"
-            placeholder="Your Email"
+            placeholder="Your Email(optional)"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="number"
-            placeholder="Your Phone Number"
+            placeholder="Your Phone Number(optional)"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />

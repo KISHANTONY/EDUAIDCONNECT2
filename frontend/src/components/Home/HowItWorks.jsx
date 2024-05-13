@@ -6,7 +6,7 @@ import { IoMdSend } from "react-icons/io";
 const HowItWorks = () => {
   return (
     <>
-      <div class="service" id="service">
+      <div className="service" id="service">
 
       <div className="service" id="service">
       <h5>SERVICES</h5>
@@ -51,7 +51,7 @@ const HowItWorks = () => {
           <div className="heading">
             <div className="icon"><i className="far fa-envelope"></i></div>
             <div className="info">
-              <p>Emails :</p>
+              <p>Email :</p>
               <p id="contactinfo">eduAidConnect@gmail.com</p>
             </div>
           </div>

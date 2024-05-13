@@ -78,6 +78,11 @@ const reqschema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  paymentStatus: {
+    type: String,
+    enum: ['unpaid', 'paid'],
+    default: 'unpaid'
+  }
 });
 
 export const request = mongoose.model("Request", reqschema);

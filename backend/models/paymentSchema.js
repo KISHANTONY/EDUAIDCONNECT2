@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 
 const paymentSchema = new mongoose.Schema({
+  
   name: {
     type: String,
     required: [true, "Please enter your Name!"],
@@ -21,6 +22,7 @@ const paymentSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please enter your Phone Number!"],
   },
+
   address: {
     type: String,
     required: [true, "Please enter your Address!"],

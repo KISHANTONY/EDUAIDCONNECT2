@@ -86,11 +86,12 @@ const Postreq = () => {
               </select>
             </div>
             <div className="wrapper">
-              <input
-                type="text"
+            <textarea
+                rows="5" // Set rows to 5 for 5 lines
                 value={UPI}
                 onChange={(e) => setUPI(e.target.value)}
-                placeholder="UPI"
+                placeholder="Bank Account Details"
+                style={{ width: "100%", maxWidth: "500px" }} 
               />
               <input
                 type="text"

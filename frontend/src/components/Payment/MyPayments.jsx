@@ -26,7 +26,7 @@ const MyPayments = () => {
           });
       } else {
         axios
-          .get("http://localhost:4000/api/v1/payment/Reqseeker/getall", {
+          .get("http://localhost:4000/api/v1/payment/Sponsor/getall", {
             withCredentials: true,
           })
           .then((res) => {
@@ -81,7 +81,7 @@ const MyPayments = () => {
           ) : (
             payments.map((element) => {
               return (
-                <ReqseekerCard
+                <SponsorCard
                   element={element}
                   key={element._id}
                   deletePayment={deletePayment}
@@ -120,7 +120,7 @@ const MyPayments = () => {
 
 export default MyPayments;
 
-const ReqseekerCard = ({ element, deletePayment, openModal }) => {
+const SponsorCard = ({ element, deletePayment, openModal }) => {
   return (
     <>
       <div className="request_seeker_card">
@@ -138,7 +138,7 @@ const ReqseekerCard = ({ element, deletePayment, openModal }) => {
             <span>Address:</span> {element.address}
           </p>
           <p>
-            <span>CoverLetter:</span> {element.coverLetter}
+            <span>Words of Support:</span> {element.coverLetter}
           </p>
         </div>
         <div className="proof">
@@ -148,11 +148,11 @@ const ReqseekerCard = ({ element, deletePayment, openModal }) => {
             onClick={() => openModal(element.proof.url)}
           />
         </div>
-        <div className="btn_area">
+        {/* <div className="btn_area">
           <button onClick={() => deletePayment(element._id)}>
             Delete 
           </button>
-        </div>
+        </div> */}
       </div>
     </>
   );
@@ -176,7 +176,7 @@ const StudentCard = ({ element, openModal }) => {
             <span>Address:</span> {element.address}
           </p>
           <p>
-            <span>CoverLetter:</span> {element.coverLetter}
+            <span>Words of Support:</span> {element.coverLetter}
           </p>
         </div>
         <div className="proof">

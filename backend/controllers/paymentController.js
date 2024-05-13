@@ -45,22 +45,22 @@ export const postPayment = catchAsyncErrors(async (req, res, next) => {
   if (!ReqDetails) {
     return next(new ErrorHandler("request not found!", 404));
   }
+  await request.findByIdAndUpdate(req.body.requestId, { paymentStatus: 'paid' });
 
   const StudentID = {
     user: ReqDetails.postedBy,
     role: "Student",
   };
   if (
-    !name ||
-    !email ||
+    
     !coverLetter ||
-    !phone ||
+
     !address ||
     !applicantID ||
     !StudentID ||
     !proof
   ) {
-    return next(new ErrorHandler("Please fill all fields.", 400));
+    return next(new ErrorHandler("Please fill the fields.", 400));
   }
   const payment = await Payment.create({
     name,
@@ -99,7 +99,7 @@ export const StudentGetAllPayments = catchAsyncErrors(
   }
 );
 
-export const ReqseekerGetAllPayments = catchAsyncErrors(
+export const SponsorGetAllPayments = catchAsyncErrors(
   async (req, res, next) => {
     const { role } = req.user;
     if (role === "Student") {
@@ -116,7 +116,7 @@ export const ReqseekerGetAllPayments = catchAsyncErrors(
   }
 );
 
-export const ReqseekerDeletePayment = catchAsyncErrors(
+export const SponsorDeletePayment = catchAsyncErrors(
   async (req, res, next) => {
     const { role } = req.user;
     if (role === "Student") {

@@ -23,7 +23,7 @@ const uploadToCloudinary = async (file) => {
   }
 };
 export const getAllReqs = catchAsyncErrors(async (req, res, next) => {
-  const Reqs = await Request.find({ expired: false });
+  const Reqs = await Request.find({ paymentStatus: 'unpaid' });
   res.status(200).json({
     success: true,
     Reqs,

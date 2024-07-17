@@ -39,7 +39,7 @@ const HeroSection = () => {
           <h5>_</h5>
           <h1>Why Donate?</h1>
           <p>We know that students are looking for a platform to seek financial assistance
-            for their education.
+            for their education...
             So we connect students with potential donors, scholarships, and
             other funding opportunities
             and empower students to overcome financial barriers and

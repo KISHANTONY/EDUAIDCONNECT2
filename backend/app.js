@@ -4,7 +4,6 @@ import { dbConnection } from "./database/dbConnection.js";
 import reqRouter from "./routes/reqRouter.js";
 import userRouter from "./routes/userRouter.js";
 import paymentRouter from "./routes/paymentRouter.js";
-import { config } from "dotenv";
 import cors from "cors";
 import { errorMiddleware } from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
